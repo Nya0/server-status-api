@@ -4,6 +4,14 @@ const router = express.Router();
 const ServerInfo =  require('../models/serverInfo')
 const StatusHistory = require('../models/statusHistory')
 
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+
 /* GET home page. */
 router.get('/status', async function(req, res, next) {
     const result = []
