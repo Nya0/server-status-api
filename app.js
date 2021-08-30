@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose')
-const cors = require('cors')
 
 const indexRouter = require('./routes/index');
 
@@ -8,11 +7,13 @@ mongoose.connect('mongodb://localhost/agent-washington')
 
 const app = express();
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    next();
 });
+
 
 app.use('/api/v1', indexRouter);
 
