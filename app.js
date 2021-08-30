@@ -8,7 +8,9 @@ mongoose.connect('mongodb://localhost/agent-washington')
 
 const app = express();
 
-app.use(cors())
+app.use(cors({
+  origin: '*.lbpunion.com'
+}))
 app.use(express.json());
 
 app.use('/api/v1', indexRouter);
